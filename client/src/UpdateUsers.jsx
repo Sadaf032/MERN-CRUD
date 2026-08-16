@@ -12,7 +12,7 @@ function UpdateUsers() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/${id}`)
+      .get(`https://mern-crud-production.up.railway.app/users/${id}`)
       .then((result) => {
         setName(result.data.name);
         setEmail(result.data.email);
@@ -27,7 +27,7 @@ function UpdateUsers() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:5000/users/${id}`, {
+      .put(`https://mern-crud-production.up.railway.app/users/${id}`, {
         name,
         email,
         age

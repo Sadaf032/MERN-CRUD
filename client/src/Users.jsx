@@ -7,7 +7,7 @@ function Users() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/users")
+            .get("https://mern-crud-production.up.railway.app/users")
             .then((result) => {
                 console.log(result.data);
                 setUsers(result.data);
@@ -16,6 +16,20 @@ function Users() {
                 console.log(err);
             });
     }, []);
+
+    const handleDelete = (id) => {
+        axios
+            .delete(`https://mern-crud-production.up.railway.app/users/${id}`)
+            .then(() => {
+                setUsers((prevUsers) =>
+                    prevUsers.filter((user) => user._id !== id)
+                );
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("Error deleting user");
+            });
+    };
 
     return (
         <div className="d-flex justify-content-center align-items-center">
@@ -41,6 +55,7 @@ function Users() {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.age}</td>
+
                                 <td>
                                     <Link
                                         to={`/update/${user._id}`}
@@ -51,20 +66,10 @@ function Users() {
 
                                     <button
                                         className="btn btn-danger"
-                                        onClick={() => {
-                                            axios
-                                                .delete(`http://localhost:5000/users/${user._id}`)
-                                                .then(() => {
-                                                    setUsers(users.filter((u) => u._id !== user._id));
-                                                })
-                                                .catch((err) => {
-                                                    console.log(err);
-                                                    alert("Error deleting user");
-                                                });
-                                        }}>
+                                        onClick={() => handleDelete(user._id)}
+                                    >
                                         Delete
                                     </button>
-
                                 </td>
                             </tr>
                         ))}
