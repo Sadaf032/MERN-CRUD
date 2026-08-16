@@ -16,13 +16,17 @@ function CreateUsers() {
     }
 
     try {
-      const result = await axios.post("http://localhost:5000/users", {
-        name,
-        email,
-        age,
-      });
+      const result = await axios.post(
+        "https://mern-crud-production.up.railway.app/users",
+        {
+          name,
+          email,
+          age,
+        }
+      );
 
-      console.log(result);
+      console.log(result.data);
+
       setMessage("User added successfully!");
 
       setName("");
@@ -48,6 +52,7 @@ function CreateUsers() {
 
           <div className="mb-2">
             <label htmlFor="name">Name</label>
+
             <input
               type="text"
               id="name"
@@ -59,6 +64,7 @@ function CreateUsers() {
 
           <div className="mb-2">
             <label htmlFor="email">Email</label>
+
             <input
               type="email"
               id="email"
@@ -70,6 +76,7 @@ function CreateUsers() {
 
           <div className="mb-2">
             <label htmlFor="age">Age</label>
+
             <input
               type="number"
               id="age"
